@@ -1,0 +1,37 @@
+function [is_diag] = isSqMatrixDiagonal(M,tol)
+%UNTITLED2 Summary of this function goes here
+%   Detailed explanation goes here
+    %input check
+    if(numel(size(M))~=2)
+        error('isSqMatrixDiagonal:M','Not a matrix')
+        return;
+    end
+    if(size(M,1)~=size(M,2))
+        error('isSqMatrixDiagonal:M','matrix not square')
+        return;
+    end
+    if(nargin<2)
+        %no tolerance provided, setting default value
+        tol=1e-12;
+    end
+    is_diag=true;
+    mat_size = M(1);
+    for i=1:mat_size
+        for j=1:mat_size
+            if i==j
+                if abs(M(i,j))<=tol
+                    is_diag=false;
+                    break;
+                end
+            else
+                if M(i,j)>tol 
+                    is_diag=false;
+                    break;
+                end
+            end
+        end
+        if(~is_diag)
+            break;
+        end
+    end
+end
