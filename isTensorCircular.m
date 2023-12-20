@@ -44,13 +44,17 @@ function [isCircular,modes] = isTensorCircular(T,modes_to_check)
         %mode(s) to check provided, checking for that mode(s)
         for m=1:sz_mode(1)
             if(sz(modes_to_check(m,1))~=sz(modes_to_check(m,2)))
-                continue
+                continue;
             end
-            omega = tmprod(T,{conj(dftmtx(sz(modes_to_check(m,1)))),dftmtx(sz(modes_to_check(m,1)))},[modes_to_check(m,1),modes_to_check(m,2)])/sz(modes_to_check(m,2))^2;
+            omega = tmprod(T,{dftmtx(sz(modes_to_check(m,1))),conj(dftmtx(sz(modes_to_check(m,1))))},[modes_to_check(m,1),modes_to_check(m,2)])/sz(modes_to_check(m,2))^2;
             if isTensorDiagonal(omega)
                 %TODO 
                 modes = [modes ;[modes_to_check(m,1),modes_to_check(m,2)]];
                 isCircular = true;
+            else
+                isCircular = false;
+                modes = [];
+                return
             end
         end
         return
