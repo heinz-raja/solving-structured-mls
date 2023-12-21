@@ -38,31 +38,6 @@ function [is_diag,type] = isTensorDiagonal(T,tol)
         if sum(abs(tmp),'all') > tol
             isfullydiagonal = false;
         end
-        %{
-        for i=1:sz(1)
-            for j=1:sz(2)
-                for k=1:sz(3)
-                    if i==j && j==k
-                        if abs(T(i,j,k)) <= tol
-                            isfullydiagonal=false;
-                            break;
-                        end
-                    else
-                        if abs(T(i,j,k))>=tol
-                            isfullydiagonal=false;
-                            break;
-                        end
-                    end
-                end
-                if(~isfullydiagonal)
-                    break;
-                end
-            end
-            if(~isfullydiagonal)
-                break;
-            end
-        end
-        %}
         if(isfullydiagonal)
             is_diag=true;
             type=[1,2,3];
@@ -96,27 +71,4 @@ function [is_diag,type] = isTensorDiagonal(T,tol)
     end
     is_diag=false;
     type=[];
-    %{
-    if(~isdiag(sum(abs(T),3)))
-        is_1_2_diagonal=false;
-    end
-    if(~isdiag(squeeze(sum(abs(T),2))))
-        is_1_3_diagonal=false;
-    end
-    if(~isdiag(squeeze(sum(abs(T),1))))
-        is_2_3_diagonal=false;
-    end
-    if(is_2_3_diagonal)
-        is_diag = true;
-        type = [2,3];
-    end
-    if(is_1_3_diagonal)
-        is_diag=true;
-        type=[1,3];
-    end
-    if(is_1_2_diagonal)
-        is_diag=true;
-        type=[1,2];
-    end
-    %}
 end

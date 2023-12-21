@@ -1,4 +1,4 @@
-function [u,nu] = housegen(x)
+hhfunction [u,nu] = housegen(x)
     % [u,nu] = housegen(x)
     % Generate Householder reflection.
     % G. W. Stewart, "Matrix Algorithms, Volume 1", SIAM, 1998.
