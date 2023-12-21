@@ -19,6 +19,12 @@ function x = solve_circ(T,b)
         %TODO return appropriate response
         error('solve_circ:T','Dimensions dont match.')
     end
+    if(isTensorCircular(T,[1,2;1,3]))
+        omega = tmprod(T,{dftmtx(sz(1)),conj(dftmtx(sz(1))),conj(dftmtx(sz(1)))},[1,2,3])/sz(2)^2;
+        y = solve_super_diag(getTensorSuperDiag(omega),size(sz,2),b);
+        x = conj(dftmtx(sz(2)))*y'./sz(2);
+        return
+    end
     if(isTensorCircular(T,[1,2]))
         %TODO
         omega = tmprod(T,{conj(dftmtx(sz(2))),dftmtx(sz(2))},[1,2])/sz(2)^2;
@@ -27,7 +33,9 @@ function x = solve_circ(T,b)
     end
     if(isTensorCircular(T,[2,3]))
         %Possibility of {2,3} circular
-        omega = tmprod(T,{conj(dftmtx(sz(2))),dftmtx(sz(2))},[2,3])/sz(2)^2;
+        F = 1/sz(2)*dftmtx(sz(2));
+        F_list = {F,conj(F)};
+        omega = tmprod(T,F_list,[2,3]);
         y = solve_part_diag(omega,b);
         x = conj(dftmtx(sz(2)))*y./sz(2);
         return
