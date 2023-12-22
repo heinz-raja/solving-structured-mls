@@ -31,8 +31,4 @@ function x = LSR1_proj(T,b)
     A_tilde = A_tilde(:,1:sz(2));
     x_tilde = A_tilde\b;
     x = x_tilde;
-%     x = x./x(1,1);
-%     x = zeros(sz(2),1);
-%     x(1,1) = x_tilde(1,1)^(1/sz(2));
-    
 end

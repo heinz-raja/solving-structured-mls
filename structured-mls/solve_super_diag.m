@@ -13,9 +13,6 @@ function [x] = solve_super_diag(D,N,b)
 % - 2023/10/25   HD      Initial implementation
 
     % input check
-    % if N is odd, then the b/d should be positive (check complex)
-    % if N is even, then ...
-
     % pre-processing
     sz = size(D,2);
     
