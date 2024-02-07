@@ -40,7 +40,8 @@ function [x,y] = solve_part_diag_asymm(T,b)
         %   Ax^2 = b
         z = A\b;
         x = zeros(sz(2),1);
-        y = randn(sz(2),1);
+%         y = randn(sz(2),1);
+        y = ones(sz(2),1)
         for i=1:sz(2)
             x(i) = z(i)/y(i);
         end

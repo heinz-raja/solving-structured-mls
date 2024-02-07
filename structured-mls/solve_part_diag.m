@@ -21,21 +21,17 @@ function [x] = solve_part_diag(T,b)
         %mode
         %TODO return appropriate response
         error('solve_part_diag:T','dimensions dont match')
-        return
     end
     if(sz(1)~=size(b,1))
         error('solve_part_diag:T','dimensions of b and T do not match')
-        return
     end
 
     [ans,type]=isTensorDiagonal(T);
     if(~ans)
         error('solve_part_diag:T','Tensor not diagonal in any mode')
-        return
     end
     if(sz(1)~=size(b,1))
-        error('solve_part_diag:T','dimensions do not mathc(T and b)')
-        return
+        error('solve_part_diag:T','dimensions do not match(T and b)')
     end
 
     %Computation

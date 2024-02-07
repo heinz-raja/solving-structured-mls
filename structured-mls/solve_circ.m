@@ -33,11 +33,12 @@ function x = solve_circ(T,b)
     end
     if(isTensorCircular(T,[2,3]))
         %Possibility of {2,3} circular
-        F = 1/sz(2)*dftmtx(sz(2));
+        F = 1/sqrt(sz(2))*dftmtx(sz(2));
         F_list = {F,conj(F)};
         omega = tmprod(T,F_list,[2,3]);
         y = solve_part_diag(omega,b);
-        x = conj(dftmtx(sz(2)))*y./sz(2);
+        x = F\y;
+%         x = conj(dftmtx(sz(2))./sz(2))*y;
         return
     end
     if(isTensorCircular(T,[1,3]))
