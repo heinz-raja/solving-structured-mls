@@ -20,7 +20,7 @@ function [is_diag] = isSqMatrixDiagonal(M,tol)
     end
     if(nargin<2)
         %no tolerance provided, setting default value
-        tol=1e-12;
+        tol=1e-8;
     end
     is_diag=true;
     mat_size = size(M,1);

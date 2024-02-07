@@ -35,11 +35,13 @@ function x = solve_hankel(T,b)
     end
     if(isTensorHankel(T,[2,3]))
         %Possibility of {2,3} hankel
-        F = dftmtx(sz(2));
-        F_list = {F,F};
-        omega = tmprod(T,F_list,[2,3])./sz(2)^2;
+        F = dftmtx(sz(2))./sqrt(sz(2));
+        F_list = {conj(F),conj(F)};
+        omega = tmprod(T,F_list,[2,3]);
         y = solve_part_diag(omega,b);
-        x = conj(dftmtx(sz(2)))*y./sz(2);
+        x = conj(F)*y;
+        %x = x./sz(2);
+%         x = conj(dftmtx(sz(2)))*y./sz(2);
         return
     end
     if(isTensorHankel(T,[1,3]))
